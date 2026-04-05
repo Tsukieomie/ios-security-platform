@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Original entitlements -->
+	<key>com.apple.developer.user-fonts</key>
+	<array>
+		<string>app-usage</string>
+	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>$(PRODUCT_APP_GROUP_IDENTIFIER)</string>
+	</array>
+
+	<!-- JIT SUPPORT — required for TXM-compliant MAP_JIT on A15+/iOS 17+ -->
+	<!-- Allows mmap(MAP_JIT) when debugger (StikDebug) is attached         -->
+	<key>com.apple.security.cs.allow-jit</key>
+	<true/>
+
+	<!-- Required for pthread_jit_write_with_callback_np() on TXM devices  -->
+	<key>com.apple.security.cs.jit-write-allowlist</key>
+	<true/>
+
+	<!-- Required: allows StikDebug to attach as debugger (sets CS_DEBUGGED) -->
+	<!-- Without CS_DEBUGGED, mmap(MAP_JIT) silently returns MAP_FAILED     -->
+	<key>get-task-allow</key>
+	<true/>
+
+	<!-- PERFORMANCE: Raise per-process memory limit (~3GB vs ~1.5GB default) -->
+	<key>com.apple.developer.kernel.increased-memory-limit</key>
+	<true/>
+
+	<!-- PERFORMANCE: Extended virtual address space for JIT region + guest mem -->
+	<key>com.apple.developer.kernel.extended-virtual-addressing</key>
+	<true/>
+
+	<!-- NETWORK: Required for iSH networking (was implicit, now explicit) -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<key>com.apple.security.network.server</key>
+	<true/>
+</dict>
+</plist>

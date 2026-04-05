@@ -1,0 +1,14 @@
+diff --git a/meson.build b/meson.build
+index 69545530..658db991 100644
+--- a/meson.build
++++ b/meson.build
+@@ -49,6 +49,9 @@ emu_src = [
+     'emu/vec.c',
+     'emu/mmx.c',
+     'emu/float80.c',
++    # JIT backend — TXM-compliant MAP_JIT for A15+/iOS 17+
++    'emu/jit.c',
++    'emu/jit_arm64.c',
+ 
+ ]
+ gadgets = 'asbestos/gadgets-' + host_machine.cpu_family()
